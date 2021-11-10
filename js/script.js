@@ -228,7 +228,7 @@ const generateAuthors = function (customSelector = ''){
     /* insert HTML of all the links into the tags wrapper */
     titleList.innerHTML = titleList.innerHTML + authorLinkHTML;
     /* [NEW] find list of authors in right column */
-    const authorList = document.querySelector(opt.AuthorsListSelector);
+    const authorList = document.querySelector('.authors');
 
     /* [NEW] create variable for all links HTML code */
     let allAuthorsHTML = '';
