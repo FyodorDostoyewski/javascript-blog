@@ -8,7 +8,6 @@ const opt = {
   TitleSelector: '.post-title',
   TitleListSelector: '.titles',
   TitleListSelectorA: '.titles a',
-  /* added during 7.3 module */
   TagListSelector: '.tags.list',
   CloudClassCount: 5,
   CloudClassPrefix: 'tag-size-',
@@ -209,14 +208,15 @@ const generateAuthors = function (customSelector = ''){
     const titleList = article.querySelector(opt.ArticleAuthorSelector + customSelector);
     /* make html variable with empty string */
     let html = '';
+
     /* get author from data-tags attribute */
     const authorTags = article.getAttribute('data-author');
     // console.log(authorTags);
     /* generate HTML of the link */
-    const authorLinkHTML = '<span> by </span><a href="#author-' + authorTags + '"><span>' + authorTags + '</span></a>';
+    const authorLinkHTML = '<span></span><a href="#author-name' + authorTags + '"><span>' + authorTags + '</span></a>';
     // console.log(authorLinkHTML);
     /* add generated code to html variable */
-    html += authorLinkHTML;
+    html += html + authorLinkHTML;
     // console.log(html);
     /* [NEW] check if this link is NOT already in allAuthors */
     if (!allAuthors[authorTags]) {
@@ -227,7 +227,6 @@ const generateAuthors = function (customSelector = ''){
     }
     /* insert HTML of all the links into the tags wrapper */
     titleList.innerHTML = titleList.innerHTML + authorLinkHTML;
-    /* END LOOP: for every article: */
     /* [NEW] find list of authors in right column */
     const authorList = document.querySelector(opt.AuthorsListSelector);
 
@@ -236,7 +235,8 @@ const generateAuthors = function (customSelector = ''){
 
     /* [NEW] START LOOP: for each tag in allAuthors: */
     for (let author in allAuthors) {
-      allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + ' (' + allAuthors[author] + ') ' + '</a></li> ';
+      const authorLinkHTML = '<li><a href="#author-' + author + '">' + author + ' (' + allAuthors[author] + ') ' + '</a></li> ';
+      allAuthorsHTML += authorLinkHTML;
     }
     authorList.innerHTML = allAuthorsHTML;
   }
